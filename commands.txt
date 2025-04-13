@@ -1,0 +1,5 @@
+use-emulator
+use-phone
+install-emulator
+install-phone
+devices
