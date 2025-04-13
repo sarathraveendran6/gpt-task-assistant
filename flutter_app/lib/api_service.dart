@@ -91,4 +91,27 @@ class ApiService {
       }
     }
 
+  static Future<String> editTask(String oldText, {String? newText, String? project, List<String>? tags}) async {
+    final url = Uri.parse("$baseUrl/edit_task");
+
+    final body = {
+      "old_message": oldText,
+      "new_message": newText,
+      "project": project,
+      "tags": tags,
+    };
+
+    final response = await http.put(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return "Task updated!";
+    } else {
+      throw Exception("Failed to update task: ${response.statusCode}");
+    }
+  }
+
 }

@@ -21,6 +21,12 @@ class TaskRequest(BaseModel):
     project: Optional[str] = None
     tags: Optional[List[str]] = []
 
+class EditTaskRequest(BaseModel):
+    old_message: str
+    new_message: Optional[str] = None
+    project: Optional[str] = None
+    tags: Optional[List[str]] = None
+
 @app.get("/get_tasks")
 def get_tasks():
     return {"tasks": TaskService.get_tasks()}
@@ -38,5 +44,17 @@ def add_task(request: TaskRequest):
 def delete_task(task_text: str):
     result = TaskService.delete_task(task_text)
     if result["status"] == "deleted":
+        return result
+    raise HTTPException(status_code=404, detail="Task not found")
+
+@app.put("/edit_task")
+def edit_task(request: EditTaskRequest):
+    result = TaskService.edit_task(
+        old_text=request.old_message,
+        new_text=request.new_message,
+        project=request.project,
+        tags=request.tags
+    )
+    if result["status"] == "updated":
         return result
     raise HTTPException(status_code=404, detail="Task not found")
