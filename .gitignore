@@ -17,6 +17,8 @@ flutter_app/macos/
 flutter_app/windows/
 flutter_app/linux/
 flutter_app/web/
+!flutter_app/android/app/src/main/AndroidManifest.xml
+!flutter_app/android/app/build.gradle
 
 # ============================================
 # ✅ Python / FastAPI

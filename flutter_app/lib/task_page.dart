@@ -136,14 +136,30 @@ class _TaskPageState extends State<TaskPage> {
                         ),
                         subtitle: Row(
                           children: [
-                            if (task.project != null) Text("📂 ${task.project}"),
-                            if (task.tags != null)
-                              ...task.tags!.map((t) => Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Chip(label: Text(t)),
-                                  )),
+                            if (task.project != null)
+                              Expanded(
+                                child: Text(
+                                  "📂 ${task.project}",
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            if (task.tags != null && task.tags!.isNotEmpty)
+                              Expanded(
+                                child: Wrap(
+                                  spacing: 6.0,
+                                  children: task.tags!.map((tag) {
+                                    return Chip(
+                                      label: Text(
+                                        tag,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
                           ],
                         ),
+
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
