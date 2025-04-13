@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: gpt-task-backend
+    env: python
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "uvicorn backend.main:app --host 0.0.0.0 --port 10000"
+    envVars:
+      - key: SUPABASE_URL
+        value: https://emidjpwyfgydkedwwqhj.supabase.co
+      - key: SUPABASE_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtaWRqcHd5Zmd5ZGtlZHd3cWhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1MzA1ODIsImV4cCI6MjA2MDEwNjU4Mn0.pk6i8iJFTfOzOfxMbn1UnPNqyhwgF0pN0ydCrEb47PQ
